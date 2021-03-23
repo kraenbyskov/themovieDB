@@ -2,16 +2,6 @@ import CreateElement from "./components/CreateElement.js";
 
 const Root = document.getElementById("Root");
 
-// const myFunction = () => {
-//   const Container = CreateElement({
-//     elmt: "h1",
-//     content: "hello world",
-//     className: "pokemon",
-//   });
-
-//   Root.appendChild(Container);
-// };
-
 // myFunction();
 
 /* Key til APIen */
@@ -33,10 +23,13 @@ const fetchMyData = new Promise((resolve, reject) => {
 fetchMyData
   .then((Data) => {
     Data.map((data) => {
-      console.log(data);
       const Card = CreateElement({ className: "Card" });
 
-      Root.appendChild(Card);
+      const Link = CreateElement({
+        elmt: "a",
+        src: `/movie.html?id=${data.id}`,
+        className: "Card_Link",
+      });
 
       const Title = CreateElement({
         elmt: "h4",
@@ -56,17 +49,11 @@ fetchMyData
         className: "Card_Poster",
       });
 
-      const Link = CreateElement({
-        elmt: "a",
-        src: `/movie.html?id=${data.id}`,
-        content: "Link til side",
-        className: "Card_Link",
-      });
-
+      Root.appendChild(Link);
+      Link.appendChild(Card);
       Card.appendChild(Poster);
       Card.appendChild(Title);
       Card.appendChild(Rating);
-      Card.appendChild(Link);
     });
   })
   .catch((error) => {

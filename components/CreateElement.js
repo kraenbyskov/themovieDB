@@ -3,6 +3,7 @@
 const CreateElement = ({ elmt = "div", content = "", className = "", src = "" }) => {
 
     const Imageurl = "https://image.tmdb.org/t/p/original/";
+
     let CreateElmt = document.createElement(elmt);
 
     if (elmt === "img") {

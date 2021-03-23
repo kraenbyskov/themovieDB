@@ -10,11 +10,22 @@
   display: grid;
   -ms-grid-columns: (1fr)[5];
       grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  gap: 20px;
   margin: 30px;
 }
 
-.Container .Card_Poster {
+.Container .Card_Link {
+  text-decoration: none;
+  text-align: center;
+  -webkit-box-shadow: 1px 1px 10px black;
+          box-shadow: 1px 1px 10px black;
+}
+
+.Container .Card_Link .Card {
+  color: black;
+}
+
+.Container .Card_Link .Card_Poster {
   width: 100%;
 }
 

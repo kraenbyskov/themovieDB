@@ -22,6 +22,10 @@ const fetchMyData = new Promise((resolve, reject) => {
 fetchMyData
   .then((Data) => {
     console.log(Data);
+    const ProductionContainer = CreateElement({
+      elmt: "ul",
+      className: "GenresContainer",
+    });
     const GenresContainer = CreateElement({
       elmt: "ul",
       className: "GenresContainer",
@@ -31,9 +35,10 @@ fetchMyData
 
     const Title = CreateElement({
       elmt: "h4",
-      content: Data.title,
+      content: `Title:  ${Data.title}`,
       className: "Card_title",
     });
+
     const Overview = CreateElement({
       elmt: "p",
       content: Data.overview,
@@ -54,10 +59,34 @@ fetchMyData
       GenresContainer.appendChild(Genres);
     });
 
+    Data.production_companies.map((companies) => {
+      const Name = CreateElement({
+        elmt: "li",
+        content: companies.name,
+        className: "genres",
+      });
+      const Country = CreateElement({
+        elmt: "li",
+        content: companies.origin_country,
+        className: "Country",
+      });
+
+      const Logo = CreateElement({
+        elmt: "img",
+        src: companies.logo_path,
+        className: "Card_Backdrop",
+      });
+
+      ProductionContainer.appendChild(Name);
+      ProductionContainer.appendChild(Country);
+      ProductionContainer.appendChild(Logo);
+    });
+
     Container.appendChild(Backdrop);
     Container.appendChild(Title);
     Container.appendChild(Overview);
     Container.appendChild(GenresContainer);
+    Container.appendChild(ProductionContainer);
   })
   .catch((error) => {
     console.log(error);

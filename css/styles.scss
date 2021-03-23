@@ -9,11 +9,17 @@
 .Container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  gap: 20px;
   margin: 30px;
-  .Card {
-    &_Poster {
-      width: 100%;
+  .Card_Link {
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 1px 1px 10px black;
+    .Card {
+      color: black;
+      &_Poster {
+        width: 100%;
+      }
     }
   }
 }
