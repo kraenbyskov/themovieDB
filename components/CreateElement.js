@@ -7,7 +7,11 @@ const CreateElement = ({ elmt = "div", content = "", className = "", src = "" })
     let CreateElmt = document.createElement(elmt);
 
     if (elmt === "img") {
-        CreateElmt.src = Imageurl + src
+        if (src) {
+            CreateElmt.src = Imageurl + src
+        } else {
+            CreateElmt.src = "../image/fallback.jpg"
+        }
     }
     if (elmt === "a") {
         CreateElmt.href = src

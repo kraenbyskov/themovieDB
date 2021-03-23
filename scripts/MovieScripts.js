@@ -21,7 +21,7 @@ const fetchMyData = new Promise((resolve, reject) => {
 
 fetchMyData
   .then((Data) => {
-    console.log(Data);
+    document.title = "MySite: " + Data.title;
     const ProductionContainer = CreateElement({
       elmt: "ul",
       className: "GenresContainer",
@@ -79,7 +79,9 @@ fetchMyData
 
       ProductionContainer.appendChild(Name);
       ProductionContainer.appendChild(Country);
-      ProductionContainer.appendChild(Logo);
+      if (companies.logo_path) {
+        ProductionContainer.appendChild(Logo);
+      }
     });
 
     Container.appendChild(Backdrop);
