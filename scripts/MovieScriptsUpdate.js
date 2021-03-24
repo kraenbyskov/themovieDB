@@ -1,36 +1,23 @@
 import CreateElement from "../components/CreateElement.js";
-
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const id = urlParams.get("id");
+import FetchMyData from "../components/FetchMyData.js";
+import GetUrlParams from "../components/GetUrlParams.js";
 
 const Root = document.getElementById("Root");
 const Genre = document.getElementById("Genre");
-/* Key til APIen */
-const Key = `6dbaab84138f7fe0967c258d01551d91`;
-/* Url */
 
-const fetchDetails = () => {
-  const urlDetails = `https://api.themoviedb.org/3/movie/${id}?api_key=${Key}&language=en-US`;
-
-  const fetchMyData = new Promise((resolve, reject) => {
-    fetch(urlDetails)
-      .then((response) => response.json())
-      .then((result) => resolve(result))
-      .catch((err) => {
-        reject(err);
-      });
-  });
-
-  fetchMyData
+const buildDetails = (url) => {
+  const myData = FetchMyData(url);
+  myData
     .then((Data) => {
       document.title = "MySite: " + Data.title;
+
       const ProductionContainer = CreateElement({
-        elmt: "ul",
+        elmt: "div",
         className: "Production_Container",
       });
+
       const GenresContainer = CreateElement({
-        elmt: "ul",
+        elmt: "div",
         className: "Genres_Container",
       });
       const Container = CreateElement({ className: "Movie_Container" });
@@ -47,6 +34,7 @@ const fetchDetails = () => {
         content: Data.overview,
         className: "Movie_overview",
       });
+
       const Backdrop = CreateElement({
         elmt: "img",
         src: Data.backdrop_path,
@@ -63,6 +51,10 @@ const fetchDetails = () => {
       });
 
       Data.production_companies.map((companies) => {
+        const ProductionCard = CreateElement({
+          elmt: "div",
+          className: "Production_Card",
+        });
         const Name = CreateElement({
           elmt: "h4",
           content: companies.name,
@@ -74,10 +66,11 @@ const fetchDetails = () => {
           src: companies.logo_path,
           className: "Production_Logo",
         });
-
-        ProductionContainer.appendChild(Name);
+        ProductionCard;
+        ProductionContainer.appendChild(ProductionCard);
+        ProductionCard.appendChild(Name);
         if (companies.logo_path) {
-          ProductionContainer.appendChild(Logo);
+          ProductionCard.appendChild(Logo);
         }
       });
 
@@ -92,26 +85,19 @@ const fetchDetails = () => {
     });
 };
 
-const fetchGenre = () => {
-  const urlGenre = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${Key}&language=en-US`;
-  const fetchMyData = new Promise((resolve, reject) => {
-    fetch(urlGenre)
-      .then((response) => response.json())
-      .then((result) => resolve(result.cast))
-      .catch((err) => {
-        reject(err);
-      });
-  });
+const buildGenre = (url) => {
+  const myData = FetchMyData(url);
 
-  fetchMyData
+  myData
     .then((Data) => {
-      Data.map((data) => {
+      Data.cast.slice(0, 6).map((data) => {
         const Container = CreateElement({ className: "Genre_Container" });
         Genre.appendChild(Container);
+
         // character
 
         const Character = CreateElement({
-          elmt: "h2",
+          elmt: "h3",
           content: `Character:  ${data.character}`,
           className: "Genre_Character",
         });
@@ -142,5 +128,5 @@ const fetchGenre = () => {
     });
 };
 
-fetchDetails();
-fetchGenre();
+buildDetails({ id: GetUrlParams("id") });
+buildGenre({ id: GetUrlParams("id"), credits: "/credits" });

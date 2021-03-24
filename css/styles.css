@@ -32,3 +32,57 @@
 .Card_Backdrop {
   width: 400px;
 }
+
+/* ==========================================================================
+   Movie Content
+   ========================================================================== */
+.Movie_container {
+  max-width: 100vh;
+  margin: auto 40px;
+  padding: 40px;
+}
+
+.Movie_container .Movie_genres {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 5px 20px;
+  background: lightblue;
+  margin: 5px;
+}
+
+.Movie_container .Movie_Backdrop {
+  width: 100%;
+}
+
+.Movie_container .Production_Container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[8];
+      grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.Movie_container .Production_Container .Production_Card {
+  text-align: center;
+  background: lightblue;
+}
+
+.Movie_container .Production_Container .Production_Logo {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Genre
+   ========================================================================== */
+.Genre {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.Genre .Genre_Container .Genre_Profile {
+  width: 100%;
+}
