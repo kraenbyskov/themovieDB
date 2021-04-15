@@ -1,6 +1,6 @@
 
 
-const CreateElement = ({ elmt = "div", content = "", className = "", src = "" }) => {
+const CreateElement = ({ elmt = "div", content = "", Attribute, className = "", src = "" }) => {
 
     const Imageurl = "https://image.tmdb.org/t/p/original/";
 
@@ -17,9 +17,19 @@ const CreateElement = ({ elmt = "div", content = "", className = "", src = "" })
         CreateElmt.href = src
     }
     CreateElmt.innerHTML = content
-    CreateElmt.classList.add(className);
+    if (className) {
+        CreateElmt.classList.add(className);
+    }
+    if (Attribute) {
+        Attribute.map(({ type, input }) => {
+            CreateElmt.setAttribute(type, input)
+        })
+
+    }
 
     return CreateElmt;
 };
 
 export default CreateElement;
+
+

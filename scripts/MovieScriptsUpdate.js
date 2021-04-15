@@ -34,6 +34,37 @@ const buildDetails = (url) => {
         content: Data.overview,
         className: "Movie_overview",
       });
+      const Youtube = CreateElement({
+        elmt: "iframe",
+        Attribute: [
+          {
+            type: "width",
+            input: "560",
+          },
+          {
+            type: "height",
+            input: "315",
+          },
+          {
+            type: "src",
+            input: "https://www.youtube.com/embed/Mus_vwhTCq0",
+          },
+          {
+            type: "title",
+            input: "YouTube video player",
+          },
+          {
+            type: "frameborder",
+            input: "0",
+          },
+          {
+            type: "allow",
+            input: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+          },
+        ]
+
+      });
+
 
       const Backdrop = CreateElement({
         elmt: "img",
@@ -74,6 +105,7 @@ const buildDetails = (url) => {
         }
       });
 
+      Container.appendChild(Youtube);
       Container.appendChild(Backdrop);
       Container.appendChild(Title);
       Container.appendChild(Overview);
